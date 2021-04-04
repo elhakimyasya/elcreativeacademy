@@ -333,9 +333,9 @@ function update() {
 						extended_valid_elements:
 							'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
 					});
+                    $('.__loader').remove();
 				});
-				$('.__loader').remove();
-
+				
 				// Save the form data
 				$('#update_entry').submit(function (e) {
 					e.preventDefault();
