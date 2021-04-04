@@ -6,6 +6,15 @@ var config = {
 };
 firebase.initializeApp(config);
 
+var scTinyMCE = document.createElement('script');
+function scTinyMCE() {
+	script.onload = function () {
+		alert('Script loaded and ready');
+	};
+	script.src = 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.7.0/tinymce.min.js';
+	document.getElementsByTagName('body')[0].appendChild(script);
+}
+
 function login() {
 	//Check login status
 	firebase.auth().onAuthStateChanged(function (user) {
@@ -236,6 +245,8 @@ function entry() {
 }
 
 function update() {
+    scTinyMCE();
+    
 	// check login status *
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
@@ -332,7 +343,7 @@ function update() {
 							'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
 					});
 				});
-                $('.__loader').remove();
+				$('.__loader').remove();
 
 				// Save the form data
 				$('#update_entry').submit(function (e) {
