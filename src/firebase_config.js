@@ -66,8 +66,7 @@ function index() {
 						'</small></div>' +
 						html; // prepend the entry because we need to display it in reverse order
 				});
-				$('#__entries.__post').removeClass('__loading').find('.__loader').remove();
-				$('#__entries.__post .__panel_content').append(html);
+				$('#__entries.__post').removeClass('__loading').find('.__loader').remove().find('.__panel_content').append(html);
 			});
 		} else {
 			// if not logged in
