@@ -479,7 +479,7 @@ function create() {
 					},
 				],
 				extended_valid_elements:
-					'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
+					'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]'
 			});
 			$('.__loader').remove();
 
