@@ -256,6 +256,7 @@ function update() {
 					$('#update_entry [name="content"]').val(entry.content);
 
 					function myCustomOnInit() {
+						alert('success');
 						$('.__loader').remove();
 					}
 					tinymce.init({
@@ -479,7 +480,6 @@ function create() {
 				],
 				extended_valid_elements:
 					'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
-				init_instance_callback: 'myCustomInitInstance',
 			});
 			$('.__loader').remove();
 
