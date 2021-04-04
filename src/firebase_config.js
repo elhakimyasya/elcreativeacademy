@@ -128,8 +128,7 @@ function profile() {
 						html; // prepend the entry because we need to display it in reverse order
 				});
 
-				$('#__entries.__post').removeClass('__loading');
-				$('#__entries.__post .__panel_content').prepend(html).find('.__loading').remove();
+				$('#__entries.__post').removeClass('__loading').find('.__loading').remove().find('.__panel_content').prepend(html);
 			});
 
 			fileRef.once('value', function (r) {
@@ -148,8 +147,7 @@ function profile() {
 						html; // prepend the entry because we need to display it in reverse order
 				});
 
-				$('#__entries.__files').removeClass('__loading');
-				$('#__entries.__files .__panel_content').prepend(html).find('.__loading').remove();
+				$('#__entries.__files').removeClass('__loading').find('.__loading').remove().find('.__panel_content').prepend(html);
 			});
 		} else {
 			// if not logged in yet
