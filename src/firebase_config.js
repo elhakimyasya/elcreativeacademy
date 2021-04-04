@@ -255,12 +255,7 @@ function update() {
 					$('#update_entry [name="labels"]').val(entry.labels);
 					$('#update_entry [name="content"]').val(entry.content);
 
-					function myCustomOnInit() {
-						alert('success');
-						$('.__loader').remove();
-					}
 					tinymce.init({
-						oninit: myCustomOnInit,
 						selector: 'textarea',
 						height: 500,
 						branding: false,
@@ -335,6 +330,9 @@ function update() {
 						],
 						extended_valid_elements:
 							'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
+						init_instance_callback: function (editor) {
+							$('.__loader').remove();
+						},
 					});
 				});
 
@@ -479,7 +477,7 @@ function create() {
 					},
 				],
 				extended_valid_elements:
-					'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]'
+					'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
 			});
 			$('.__loader').remove();
 
