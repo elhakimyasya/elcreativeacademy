@@ -332,6 +332,7 @@ function update() {
 							'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
 					});
 				});
+                $('.__loader').remove();
 
 				// Save the form data
 				$('#update_entry').submit(function (e) {
