@@ -11,8 +11,7 @@ function login() {
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
 			// if already logged in
-
-			window.location.href = 'profile.html';
+			window.location.href = 'my-profile.html';
 		}
 	});
 
@@ -23,10 +22,10 @@ function login() {
 		signInOptions: [
 			// comment unused sign-in method
 			firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-			firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-			//firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-			//firebase.auth.GithubAuthProvider.PROVIDER_ID,
-			firebase.auth.EmailAuthProvider.PROVIDER_ID,
+			// firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+			// firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+			// firebase.auth.GithubAuthProvider.PROVIDER_ID,
+			// firebase.auth.EmailAuthProvider.PROVIDER_ID,
 		],
 		// Terms of service url.
 		tosUrl: false,
