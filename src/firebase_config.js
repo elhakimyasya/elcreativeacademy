@@ -1,0 +1,1 @@
+var config={apiKey:'AIzaSyCmWRraw2UZWfp_C6p3a4QYhci5LmhtSfY',authDomain:'elc-academy.firebaseapp.com',databaseURL:'https://elc-academy-default-rtdb.firebaseio.com/',storageBucket:'elc-academy.appspot.com',};firebase.initializeApp(config)
