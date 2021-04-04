@@ -478,8 +478,10 @@ function create() {
 				],
 				extended_valid_elements:
 					'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
+				init_instance_callback: function (editor) {
+					$('.__loader').remove();
+				},
 			});
-			$('.__loader').remove();
 
 			// Process form data and save to Firebase database
 			$('#new_entry').submit(function (e) {
