@@ -6,7 +6,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-
 function login() {
 	//Check login status
 	firebase.auth().onAuthStateChanged(function (user) {
@@ -237,7 +236,6 @@ function entry() {
 }
 
 function update() {
-    
 	// check login status *
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
@@ -257,7 +255,11 @@ function update() {
 					$('#update_entry [name="labels"]').val(entry.labels);
 					$('#update_entry [name="content"]').val(entry.content);
 
+					function myCustomOnInit() {
+						$('.__loader').remove();
+					}
 					tinymce.init({
+						oninit: myCustomOnInit,
 						selector: 'textarea',
 						height: 500,
 						branding: false,
@@ -333,9 +335,8 @@ function update() {
 						extended_valid_elements:
 							'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
 					});
-                    $('.__loader').remove();
 				});
-				
+
 				// Save the form data
 				$('#update_entry').submit(function (e) {
 					e.preventDefault();
