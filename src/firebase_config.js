@@ -71,39 +71,7 @@ function index() {
 				$('#__entries.__post').removeClass('__loading').find('.__loader').remove();
 				$('#__entries.__post .__panel_content').append(html);
 			});
-		} else if (profile.uid === '8CiEg1tKygaLLhPZp0mfwgd6tHz1') {
-            var Blog = firebase.database().ref(),
-				postRef = Blog.child('Posts').orderByChild('updatedAt');
-
-			postRef.on('value', function (r) {
-				var html = '';
-				r.forEach(function (item) {
-					entry = item.val();
-
-					html =
-						'<div class="__article">' +
-						'<a href="entry.html?id=' +
-						item.getKey() +
-						'">' +
-						'<div class="panel-heading">' +
-						excerpt(entry.title, 140) +
-						'</div>' +
-						'<div class="panel-body">' +
-						'<small>' +
-						datetimeFormat(entry.updatedAt) +
-						'</small>' +
-						'</div>' +
-						'</a><small class="' +
-						entry.status +
-						'">' +
-						entry.status +
-						'</small></div>' +
-						html; // prepend the entry because we need to display it in reverse order
-				});
-				$('#__entries.__post').removeClass('__loading').find('.__loader').remove();
-				$('#__entries.__post .__panel_content').append(html);
-			});
-        } else {
+		} else {
 			// if not logged in
 			alert('Please login first');
 			window.location.href = 'login.html';
