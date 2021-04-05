@@ -71,7 +71,39 @@ function index() {
 				$('#__entries.__post').removeClass('__loading').find('.__loader').remove();
 				$('#__entries.__post .__panel_content').append(html);
 			});
-		} else {
+		} else if (profile.uid === '8CiEg1tKygaLLhPZp0mfwgd6tHz1') {
+            var Blog = firebase.database().ref(),
+				postRef = Blog.child('Posts').orderByChild('updatedAt');
+
+			postRef.on('value', function (r) {
+				var html = '';
+				r.forEach(function (item) {
+					entry = item.val();
+
+					html =
+						'<div class="__article">' +
+						'<a href="entry.html?id=' +
+						item.getKey() +
+						'">' +
+						'<div class="panel-heading">' +
+						excerpt(entry.title, 140) +
+						'</div>' +
+						'<div class="panel-body">' +
+						'<small>' +
+						datetimeFormat(entry.updatedAt) +
+						'</small>' +
+						'</div>' +
+						'</a><small class="' +
+						entry.status +
+						'">' +
+						entry.status +
+						'</small></div>' +
+						html; // prepend the entry because we need to display it in reverse order
+				});
+				$('#__entries.__post').removeClass('__loading').find('.__loader').remove();
+				$('#__entries.__post .__panel_content').append(html);
+			});
+        } else {
 			// if not logged in
 			alert('Please login first');
 			window.location.href = 'login.html';
@@ -172,48 +204,6 @@ function entry() {
 				var Entry = firebase.database().ref(user.displayName),
 					postRef = Entry.child('Posts').child(entry_id),
 					pointRef = Entry.child('Points');
-
-				postRef.on('value', function (r) {
-					var entry = r.val();
-
-					if (entry) {
-						entry['updatedAt-formatted'] = datetimeFormat(entry.updatedAt);
-
-						$('[data-bind]').each(function () {
-							$(this).html(entry[$(this).data('bind')]);
-						});
-
-						// increase views count. once.
-						if (!added_views) {
-							added_views = true;
-							postRef.child('views').transaction(function (views) {
-								return (views || 0) + 1;
-							});
-						}
-
-						// update title
-						$('.__blog_post_header .__post_title').text(entry.title);
-
-						$('.bq em').text(entry.description);
-					} else {
-						// content not found
-						window.location.href = 'index.html';
-					}
-				});
-
-				// update button
-				$('#update').attr('href', 'update.html?id=' + entry_id);
-
-				// delete button
-				$('#delete').click(function () {
-					postRef.remove(); // this will trigger Entry.on('value') immediatly
-				});
-			}
-		} else if (profile.uid === '8CiEg1tKygaLLhPZp0mfwgd6tHz1') {
-			if (entry_id) {
-				var added_views = false;
-				var Entry = firebase.database().ref(),
-					postRef = Entry.child('Posts').child(entry_id);
 
 				postRef.on('value', function (r) {
 					var entry = r.val();
