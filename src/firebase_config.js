@@ -208,48 +208,49 @@ function entry() {
 				$('#delete').click(function () {
 					postRef.remove(); // this will trigger Entry.on('value') immediatly
 				});
-			} else if (profile.uid === '8CiEg1tKygaLLhPZp0mfwgd6tHz1') {
-                if (entry_id) {
-                    var added_views = false;
-                    var Entry = firebase.database().ref(),
-                        postRef = Entry.child('Posts').child(entry_id);
-    
-                    postRef.on('value', function (r) {
-                        var entry = r.val();
-    
-                        if (entry) {
-                            entry['updatedAt-formatted'] = datetimeFormat(entry.updatedAt);
-    
-                            $('[data-bind]').each(function () {
-                                $(this).html(entry[$(this).data('bind')]);
-                            });
-    
-                            // increase views count. once.
-                            if (!added_views) {
-                                added_views = true;
-                                postRef.child('views').transaction(function (views) {
-                                    return (views || 0) + 1;
-                                });
-                            }
-    
-                            // update title
-                            $('.__blog_post_header .__post_title').text(entry.title);
-    
-                            $('.bq em').text(entry.description);
-                        } else {
-                            // content not found
-                            window.location.href = 'index.html';
-                        }
-                    });
-    
-                    // update button
-                    $('#update').attr('href', 'update.html?id=' + entry_id);
-    
-                    // delete button
-                    $('#delete').click(function () {
-                        postRef.remove(); // this will trigger Entry.on('value') immediatly
-                    });
-            } else {
+			}
+		} else if (profile.uid === '8CiEg1tKygaLLhPZp0mfwgd6tHz1') {
+			if (entry_id) {
+				var added_views = false;
+				var Entry = firebase.database().ref(),
+					postRef = Entry.child('Posts').child(entry_id);
+
+				postRef.on('value', function (r) {
+					var entry = r.val();
+
+					if (entry) {
+						entry['updatedAt-formatted'] = datetimeFormat(entry.updatedAt);
+
+						$('[data-bind]').each(function () {
+							$(this).html(entry[$(this).data('bind')]);
+						});
+
+						// increase views count. once.
+						if (!added_views) {
+							added_views = true;
+							postRef.child('views').transaction(function (views) {
+								return (views || 0) + 1;
+							});
+						}
+
+						// update title
+						$('.__blog_post_header .__post_title').text(entry.title);
+
+						$('.bq em').text(entry.description);
+					} else {
+						// content not found
+						window.location.href = 'index.html';
+					}
+				});
+
+				// update button
+				$('#update').attr('href', 'update.html?id=' + entry_id);
+
+				// delete button
+				$('#delete').click(function () {
+					postRef.remove(); // this will trigger Entry.on('value') immediatly
+				});
+			} else {
 				alert('This entry id does not exist');
 				window.location.href = 'index.html';
 			}
