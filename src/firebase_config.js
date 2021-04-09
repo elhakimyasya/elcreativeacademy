@@ -51,7 +51,7 @@ function index() {
 		if (user) {
 			var Blog = firebase.database().ref(user.displayName),
 				postRef = Blog.child('Posts').orderByChild('updatedAt');
-			postRef.on('value', function (r) {
+			postRef.once('value', function (r) {
 				var html = '';
 				r.forEach(function (item) {
 					entry = item.val();
