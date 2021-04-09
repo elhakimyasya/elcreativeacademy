@@ -42,11 +42,6 @@ function login() {
 }
 
 function index() {
-	ref.on('child_changed', function (snapshot) {
-		var changedPost = snapshot.val();
-		console.log('The updated post title is ' + changedPost.title);
-	});
-
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
 			var Blog = firebase.database().ref(user.displayName),
@@ -81,7 +76,6 @@ function index() {
 			});
 		} else {
 			// if not logged in
-			alert('Please login first');
 			window.location.href = 'login.html';
 		}
 	});
