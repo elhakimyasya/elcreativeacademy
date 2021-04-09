@@ -133,7 +133,12 @@ function profile() {
 						html; // prepend the entry because we need to display it in reverse order
 				});
 
-				$('#__entries.__post').removeClass('__loading').find('.__panel_content').prepend(html).find('.__loading').remove();
+				$('#__entries.__post')
+					.removeClass('__loading')
+					.find('.__panel_content')
+					.prepend(html)
+					.find('.__loading')
+					.remove();
 			});
 
 			fileRef.once('value', function (r) {
@@ -152,7 +157,12 @@ function profile() {
 						html; // prepend the entry because we need to display it in reverse order
 				});
 
-				$('#__entries.__files').removeClass('__loading').find('.__panel_content').prepend(html).find('.__loading').remove();
+				$('#__entries.__files')
+					.removeClass('__loading')
+					.find('.__panel_content')
+					.prepend(html)
+					.find('.__loading')
+					.remove();
 			});
 		} else {
 			// if not logged in yet
@@ -171,7 +181,7 @@ function entry() {
 				var added_views = false;
 				var Entry = firebase.database().ref(user.displayName),
 					postRef = Entry.child('Posts').child(entry_id),
-					pointRef = Entry.child('Points');
+					postPts = Entry.child('Points');
 
 				postRef.on('value', function (r) {
 					var entry = r.val();
@@ -207,14 +217,15 @@ function entry() {
 				// delete button
 				$('#delete').click(function () {
 					postRef.remove(); // this will trigger Entry.on('value') immediatly
+					// postPts.transaction(function (views) {
+					// 	return (views || 0) - 10;
+					// });
 				});
 			} else {
-				alert('This entry id does not exist');
 				window.location.href = 'index.html';
 			}
 		} else {
 			// if not logged in
-			alert('Please login first');
 			window.location.href = 'login.html';
 		}
 	});
