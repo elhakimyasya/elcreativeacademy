@@ -10,14 +10,11 @@ function login() {
 	// Check login status
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
-			// if already logged in
-
 			window.location.href = 'profile.html';
 		}
 	});
 
-	//init Login UI
-	// FirebaseUI config.
+	// init Login UI
 	var uiConfig = {
 		signInSuccessUrl: false,
 		signInOptions: [
@@ -34,11 +31,22 @@ function login() {
 
 	// Initialize the FirebaseUI Widget using Firebase.
 	var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
 	// The start method will wait until the DOM is loaded.
-	ui.start('#firebaseui-auth-container', uiConfig);
+	window.onload = function () {
+		setInterval(function () {
+			ui.start('#firebaseui-auth-container', uiConfig);
+			document.querySelector('#firebaseui-auth-container').classList.remove('__loading');
+		}, 1000);
+	};
 }
 
 function index() {
+	ref.on('child_changed', function (snapshot) {
+		var changedPost = snapshot.val();
+		console.log('The updated post title is ' + changedPost.title);
+	});
+
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
 			var Blog = firebase.database().ref(user.displayName),
