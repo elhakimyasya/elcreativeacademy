@@ -10,7 +10,7 @@ function login() {
 	// Check login status
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
-			window.location.href = 'profile.html';
+			window.location.href = 'my-profile.html';
 		}
 	});
 
