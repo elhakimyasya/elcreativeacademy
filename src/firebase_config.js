@@ -53,7 +53,7 @@ function index() {
 
 					html =
 						'<div class="__article">' +
-						'<a href="entry.html?id=' +
+						'<a href="my-posts.html?id=' +
 						item.getKey() +
 						'">' +
 						'<div class="panel-heading">' +
@@ -112,7 +112,7 @@ function profile() {
 
 					html =
 						'<div class="__article">' +
-						'<a href="entry.html?id=' +
+						'<a href="my-posts.html?id=' +
 						item.getKey() +
 						'" title="' +
 						entry.title +
@@ -376,7 +376,7 @@ function update() {
 							return entry;
 						})
 						.then(function () {
-							window.location.href = 'entry.html?id=' + entry_id;
+							window.location.href = 'my-posts.html?id=' + entry_id;
 						})
 						.catch(function (error) {
 							alert(error);
@@ -518,7 +518,7 @@ function create() {
 				postRef
 					.push(entry)
 					.then(function (data) {
-						window.location.href = 'entry.html?id=' + data.getKey();
+						window.location.href = 'my-posts.html?id=' + data.getKey();
 					})
 					.catch(function (error) {
 						alert(error);
