@@ -385,7 +385,7 @@ function update() {
 					return false;
 				});
 			} else {
-				window.location.href = 'create.html';
+				window.location.href = 'create-posts.html';
 			}
 		} else {
 			// if not logged in
