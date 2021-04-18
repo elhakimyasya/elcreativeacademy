@@ -212,7 +212,7 @@ function entry() {
 				});
 
 				// update button
-				$('#update').attr('href', 'update.html?id=' + entry_id);
+				$('#update').attr('href', 'update-post.html?id=' + entry_id);
 
 				// delete button
 				$('#delete').click(function () {
