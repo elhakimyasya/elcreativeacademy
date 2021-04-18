@@ -90,79 +90,77 @@ function profile() {
 			};
 
 			var html = '',
-				Blog = firebase.database().ref(user.displayName),
-				postRef = Blog.child('Posts'),
-				fileRef = Blog.child('Files');
+			Blog = firebase.database().ref().child('Posts'),
+			fileRef = Blog.child('Files');
 
 			html =
-				'<div class="__avatar"><img src="' +
-				user.photoURL +
-				'"/></div><div class="__info"><div class="__name"><span>' +
-				user.displayName +
-				'</span></div><span></span><span class="__email">' +
-				user.email +
-				'</span></div></div>' +
-				html; // prepend the entry because we need to display it in reverse order
+			'<div class="__avatar"><img src="' +
+			user.photoURL +
+			'"/></div><div class="__info"><div class="__name"><span>' +
+			user.displayName +
+			'</span></div><span></span><span class="__email">' +
+			user.email +
+			'</span></div></div>' + html; // prepend the entry because we need to display it in reverse order
 			$('.__profile_container').removeClass('__loading').prepend(html).find('.__loader').remove();
 
-			postRef.limitToLast(5).once('value', function (r) {
+			Blog.once('value', function (r) {
 				var html = '';
 				r.forEach(function (item) {
 					entry = item.val();
 
 					html =
-						'<div class="__article">' +
-						'<a href="my-posts.html?id=' +
-						item.getKey() +
-						'" title="' +
-						entry.title +
-						'">' +
-						'<div class="panel-heading">' +
-						excerpt(entry.title, 140) +
-						'</div>' +
-						'<div class="panel-body">' +
-						'<small>' +
-						datetimeFormat(entry.updatedAt) +
-						'</small>' +
-						'</div>' +
-						'</a><small class="' +
-						entry.status +
-						'">' +
-						entry.status +
-						'</small></div>' +
+					'<div class="__article">' +
+					'<a href="my-posts.html?id=' +
+					item.getKey() +
+					'" title="' +
+					entry.title +
+					'">' +
+					'<div class="panel-heading">' +
+					excerpt(entry.title, 140) +
+					'</div>' +
+					'<div class="panel-body">' +
+					'<small>' +
+					datetimeFormat(entry.updatedAt) +
+					'</small>' +
+					'</div>' +
+					'</a><small class="' +
+					entry.status +
+					'">' +
+					entry.status +
+					'</small></div>' +
 						html; // prepend the entry because we need to display it in reverse order
-				});
+					});
 
 				$('#__entries.__post')
-					.removeClass('__loading')
-					.find('.__panel_content')
-					.prepend(html)
-					.find('.__loading')
-					.remove();
+				.removeClass('__loading')
+				.find('.__panel_content')
+				.prepend(html)
+				.find('.__loading')
+				.remove();
 			});
 
 			fileRef.once('value', function (r) {
 				var html = '';
 				r.forEach(function (item) {
 					html =
-						'<div class="__article">' +
-						'<div class="panel-heading">' +
-						item.key +
-						'</div>' +
-						'<a href="' +
-						item.val() +
-						'" title="' +
-						item.key +
-						'" target="_blank" rel="nofollow noopener noreferer"><small>Download</small></a></div>' +
+					'<div class="__article">' +
+					'<div class="panel-heading">' +
+					item.key +
+					'</div>' +
+					'<a href="' +
+					item.val() +
+					'" title="' +
+					item.key +
+					'" target="_blank" rel="nofollow noopener noreferer"><small>Download</small></a></div>' +
 						html; // prepend the entry because we need to display it in reverse order
-				});
+					});
 
 				$('#__entries.__files')
-					.removeClass('__loading')
-					.find('.__panel_content')
-					.prepend(html)
-					.find('.__loading')
-					.remove();
+				.removeClass('__loading')
+				.find('.__panel_content')
+				.prepend(html)
+				.find('.__loading')
+				.remove();
 			});
 		} else {
 			// if not logged in yet
@@ -179,11 +177,10 @@ function entry() {
 
 			if (entry_id) {
 				var added_views = false;
-				var Entry = firebase.database().ref(user.displayName),
-					postRef = Entry.child('Posts').child(entry_id),
-					postPts = Entry.child('Points');
+				var Entry = firebase.database().ref().child('Posts').child(entry_id),
+				postPts = Entry.child('Points');
 
-				postRef.on('value', function (r) {
+				Entry.on('value', function (r) {
 					var entry = r.val();
 
 					if (entry) {
@@ -196,7 +193,7 @@ function entry() {
 						// increase views count. once.
 						if (!added_views) {
 							added_views = true;
-							postRef.child('views').transaction(function (views) {
+							Entry.child('views').transaction(function (views) {
 								return (views || 0) + 1;
 							});
 						}
@@ -216,7 +213,7 @@ function entry() {
 
 				// delete button
 				$('#delete').click(function () {
-					postRef.remove(); // this will trigger Entry.on('value') immediatly
+					Entry.remove(); // this will trigger Entry.on('value') immediatly
 					// postPts.transaction(function (views) {
 					// 	return (views || 0) - 10;
 					// });
@@ -254,10 +251,9 @@ function update() {
 			var entry_id = $_GET('id');
 
 			if (entry_id) {
-				var Entry = firebase.database().ref(user.displayName),
-					postRef = Entry.child('Posts').child(entry_id);
+				var Entry = firebase.database().ref().child('Posts').child(entry_id);
 
-				postRef.once('value', function (r) {
+				Entry.once('value', function (r) {
 					// once = just this once, no need to actively watch the changes
 					var entry = r.val();
 
@@ -272,75 +268,75 @@ function update() {
 						branding: false,
 						menubar: 'file edit view insert format tools table',
 						plugins:
-							'link image preview toc codesample table wordcount code lists insertdatetime emoticons visualblocks',
+						'link image preview toc codesample table wordcount code lists insertdatetime emoticons visualblocks',
 						toolbar:
-							'formatselect | bold italic underline strikethrough superscript subscript blockquote | link image |  alignleft aligncenter alignright alignjustify bullist numlist | table toc | codesample preview insertdatetime emoticons visualblocks code',
+						'formatselect | bold italic underline strikethrough superscript subscript blockquote | link image |  alignleft aligncenter alignright alignjustify bullist numlist | table toc | codesample preview insertdatetime emoticons visualblocks code',
 						toc_class: 'elcTOC',
 						toc_depth: 6,
 						content_style: 'body { font-family: "Segoe UI"}',
 						codesample_languages: [
-							{
-								text: 'Command Line',
-								value: 'command hljs hl hljs',
-							},
-							{
-								text: 'CSS',
-								value: 'css hljs hl css',
-							},
-							{
-								text: 'C',
-								value: 'c hljs hl c',
-							},
-							{
-								text: 'C++',
-								value: 'cpp hljs hl cpp',
-							},
-							{
-								text: 'HTML/XML',
-								value: 'html hljs hl html xml',
-							},
-							{
-								text: 'Java',
-								value: 'java hljs hl java',
-							},
-							{
-								text: 'JavaScript',
-								value: 'javascript hljs hl javascript',
-							},
-							{
-								text: 'JSON',
-								value: 'json hljs hl json',
-							},
-							{
-								text: 'Markdown',
-								value: 'markdown hljs hl markdown',
-							},
-							{
-								text: 'PHP',
-								value: 'php hljs hl php',
-							},
-							{
-								text: 'Python',
-								value: 'python hljs hl python',
-							},
-							{
-								text: 'TypeScript',
-								value: 'typescript hljs hl typescript',
-							},
+						{
+							text: 'Command Line',
+							value: 'command hljs hl hljs',
+						},
+						{
+							text: 'CSS',
+							value: 'css hljs hl css',
+						},
+						{
+							text: 'C',
+							value: 'c hljs hl c',
+						},
+						{
+							text: 'C++',
+							value: 'cpp hljs hl cpp',
+						},
+						{
+							text: 'HTML/XML',
+							value: 'html hljs hl html xml',
+						},
+						{
+							text: 'Java',
+							value: 'java hljs hl java',
+						},
+						{
+							text: 'JavaScript',
+							value: 'javascript hljs hl javascript',
+						},
+						{
+							text: 'JSON',
+							value: 'json hljs hl json',
+						},
+						{
+							text: 'Markdown',
+							value: 'markdown hljs hl markdown',
+						},
+						{
+							text: 'PHP',
+							value: 'php hljs hl php',
+						},
+						{
+							text: 'Python',
+							value: 'python hljs hl python',
+						},
+						{
+							text: 'TypeScript',
+							value: 'typescript hljs hl typescript',
+						},
 						],
 						insertdatetime_formats: ['Updated: %A, %d %B %Y'],
 						rel_list: [
-							{
-								title: 'Internal Link',
-								value: '',
-							},
-							{
-								title: 'External Link',
-								value: 'noopener noreferer nofollow',
-							},
+						{
+							title: 'Internal Link',
+							value: '',
+						},
+						{
+							title: 'External Link',
+							value: 'noopener noreferer nofollow',
+						},
 						],
 						extended_valid_elements:
-							'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
+						'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
 						init_instance_callback: function (editor) {
 							$('.__loader').remove();
 						},
@@ -363,24 +359,23 @@ function update() {
 
 					var str_esc = unescape(txtRplc);
 
-					postRef
-						.transaction(function (entry) {
-							entry = entry || {};
-							entry.title = $('#update_entry [name="title"]').val();
-							entry.description = $('#update_entry [name="description"]').val();
-							entry.labels = $('#update_entry [name="labels"]').val();
-							entry.content = str_esc;
-							entry.updatedAt = new Date().getTime();
-							entry.author = user.email;
+					Entry
+					.transaction(function (entry) {
+						entry = entry || {};
+						entry.title = $('#update_entry [name="title"]').val();
+						entry.description = $('#update_entry [name="description"]').val();
+						entry.labels = $('#update_entry [name="labels"]').val();
+						entry.content = str_esc;
+						entry.editor = user.displayName;
 
-							return entry;
-						})
-						.then(function () {
-							window.location.href = 'my-posts.html?id=' + entry_id;
-						})
-						.catch(function (error) {
-							alert(error);
-						});
+						return entry;
+					})
+					.then(function () {
+						window.location.href = 'my-posts.html?id=' + entry_id;
+					})
+					.catch(function (error) {
+						alert(error);
+					});
 
 					return false;
 				});
@@ -420,75 +415,75 @@ function create() {
 				branding: false,
 				menubar: 'file edit view insert format tools table',
 				plugins:
-					'link image preview toc codesample table wordcount code lists insertdatetime emoticons visualblocks',
+				'link image preview toc codesample table wordcount code lists insertdatetime emoticons visualblocks',
 				toolbar:
-					'formatselect | bold italic underline strikethrough superscript subscript blockquote | link image |  alignleft aligncenter alignright alignjustify bullist numlist | table toc | codesample preview insertdatetime emoticons visualblocks code',
+				'formatselect | bold italic underline strikethrough superscript subscript blockquote | link image |  alignleft aligncenter alignright alignjustify bullist numlist | table toc | codesample preview insertdatetime emoticons visualblocks code',
 				toc_class: 'elcTOC',
 				toc_depth: 6,
 				content_style: 'body { font-family: "Segoe UI"}',
 				codesample_languages: [
-					{
-						text: 'Command Line',
-						value: 'command hljs hl hljs',
-					},
-					{
-						text: 'CSS',
-						value: 'css hljs hl css',
-					},
-					{
-						text: 'C',
-						value: 'c hljs hl c',
-					},
-					{
-						text: 'C++',
-						value: 'cpp hljs hl cpp',
-					},
-					{
-						text: 'HTML/XML',
-						value: 'html hljs hl html xml',
-					},
-					{
-						text: 'Java',
-						value: 'java hljs hl java',
-					},
-					{
-						text: 'JavaScript',
-						value: 'javascript hljs hl javascript',
-					},
-					{
-						text: 'JSON',
-						value: 'json hljs hl json',
-					},
-					{
-						text: 'Markdown',
-						value: 'markdown hljs hl markdown',
-					},
-					{
-						text: 'PHP',
-						value: 'php hljs hl php',
-					},
-					{
-						text: 'Python',
-						value: 'python hljs hl python',
-					},
-					{
-						text: 'TypeScript',
-						value: 'typescript hljs hl typescript',
-					},
+				{
+					text: 'Command Line',
+					value: 'command hljs hl hljs',
+				},
+				{
+					text: 'CSS',
+					value: 'css hljs hl css',
+				},
+				{
+					text: 'C',
+					value: 'c hljs hl c',
+				},
+				{
+					text: 'C++',
+					value: 'cpp hljs hl cpp',
+				},
+				{
+					text: 'HTML/XML',
+					value: 'html hljs hl html xml',
+				},
+				{
+					text: 'Java',
+					value: 'java hljs hl java',
+				},
+				{
+					text: 'JavaScript',
+					value: 'javascript hljs hl javascript',
+				},
+				{
+					text: 'JSON',
+					value: 'json hljs hl json',
+				},
+				{
+					text: 'Markdown',
+					value: 'markdown hljs hl markdown',
+				},
+				{
+					text: 'PHP',
+					value: 'php hljs hl php',
+				},
+				{
+					text: 'Python',
+					value: 'python hljs hl python',
+				},
+				{
+					text: 'TypeScript',
+					value: 'typescript hljs hl typescript',
+				},
 				],
 				insertdatetime_formats: ['Updated: %A, %d %B %Y'],
 				rel_list: [
-					{
-						title: 'Internal Link',
-						value: '',
-					},
-					{
-						title: 'External Link',
-						value: 'noopener noreferer nofollow',
-					},
+				{
+					title: 'Internal Link',
+					value: '',
+				},
+				{
+					title: 'External Link',
+					value: 'noopener noreferer nofollow',
+				},
 				],
 				extended_valid_elements:
-					'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
+				'img[src|loading=lazy|alt|title|width|height|align|onmouseover|onmouseout|name]',
 				init_instance_callback: function (editor) {
 					$('.__loader').remove();
 				},
@@ -498,32 +493,27 @@ function create() {
 			$('#new_entry').submit(function (e) {
 				e.preventDefault();
 
-				var entry = {};
-				entry.title = $(this).find('[name="title"]').val();
-				entry.description = $(this).find('[name="description"]').val();
-				entry.labels = $(this).find('[name="labels"]').val();
-				entry.content = tinymce.get('content').getContent();
-				entry.createdAt = new Date().getTime();
-				entry.updatedAt = entry.createdAt;
-				entry.views = 0;
-				entry.status = 'Pending';
+				var posts = {};
+				posts.title = $(this).find('[name="title"]').val();
+				posts.description = $(this).find('[name="description"]').val();
+				posts.labels = $(this).find('[name="labels"]').val();
+				posts.content = tinymce.get('content').getContent();
+				posts.author = user.displayName;
+				posts.status = 'Pending';
+				posts.views = 0;
 
-				var Entry = firebase.database().ref(user.displayName),
-					postRef = Entry.child('Posts');
 
-				Entry.child('Points').transaction(function (views) {
-					return (views || 0) + 10;
+				var Posts = firebase.database().ref().child('Posts'),
+				Users = firebase.database().ref().child('Users');
+
+				Posts.push(posts).then(function (data) {
+					window.location.href = 'my-posts.html?id=' + data.getKey();
+				}).catch(function (error) {
+					alert(error);
+					console.error(error);
 				});
 
-				postRef
-					.push(entry)
-					.then(function (data) {
-						window.location.href = 'my-posts.html?id=' + data.getKey();
-					})
-					.catch(function (error) {
-						alert(error);
-						console.error(error);
-					});
+				Users.push(user.uid);
 
 				return false;
 			});
