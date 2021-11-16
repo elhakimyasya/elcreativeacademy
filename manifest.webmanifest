@@ -1,0 +1,55 @@
+{
+    "name": "EL Creative Academy",
+    "short_name": "EL Creative Academy",
+    "start_url": "https://www.elcreativeacademy.com/?m=1",
+    "scope": "https://www.elcreativeacademy.com/?m=1",
+    "display": "fullscreen",
+    "background_color": "#ffffff",
+    "theme_color": "#1a73e8",
+    "description": "EL Creative Academy adalah media pembelajaran yang berisi tutorial, dan referensi yang berkaitan dengan topik Teknologi dan Informasi.",
+    "icons": [
+        {
+            "src": "img/icons/32.png",
+            "sizes": "32x32",
+            "type": "image/png",
+            "density": "0.75"
+        },
+        {
+            "src": "img/icons/48.png",
+            "sizes": "48x48",
+            "type": "image/png",
+            "density": "1.0"
+        },
+        {
+            "src": "img/icons/72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "density": "1.5"
+        },
+        {
+            "src": "img/icons/114.png",
+            "sizes": "114x114",
+            "type": "image/png",
+            "density": "2.0"
+        },
+        {
+            "src": "img/icons/144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "density": "3.0"
+        },
+        {
+            "src": "img/icons/196.png",
+            "sizes": "196x196",
+            "type": "image/png",
+            "density": "4.0",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "img/icons/512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "density": "5.0"
+        }
+    ]
+}
