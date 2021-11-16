@@ -60,7 +60,7 @@ function elcreativeAuthProfile() {
         var userBoolean;
 
         if (database) {
-            materiaConfig.elements.postBody.innerHTML = "<div class='auth_profile_container'><div class='auth_profile_image'></div><div class='auth_profile_info'><div class='profile_name'></div><div class='profile_meta'><div class='profile_meta_top'></div></div></div></div><div class='auth_post_container'></div><div id='dialog_edit_profile' class='elcreative_dialog' aria-hidden='true' role='listbox'><div class='dialog_container'><div class='dialog_header'><span></span><button class='button_close_dialog elcreative_ripple elcreative_button_icon small' type='button' aria-label='Close Dialog' data-toggle-trigger-off><svg width='24' height='24' viewBox='0 0 24 24'><path d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z'/></svg></button></div><div class='dialog_content'></div><div class='dialog_footer'></div></div></div>";
+            document.querySelector(".elcreative_section .post_container_end .post_body").innerHTML = "<div class='auth_profile_container'><div class='auth_profile_image'></div><div class='auth_profile_info'><div class='profile_name'></div><div class='profile_meta'><div class='profile_meta_top'></div></div></div></div><div class='auth_post_container'></div><div id='dialog_edit_profile' class='elcreative_dialog' aria-hidden='true' role='listbox'><div class='dialog_container'><div class='dialog_header'><span></span><button class='button_close_dialog elcreative_ripple elcreative_button_icon small' type='button' aria-label='Close Dialog' data-toggle-trigger-off><svg width='24' height='24' viewBox='0 0 24 24'><path d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z'/></svg></button></div><div class='dialog_content'></div><div class='dialog_footer'></div></div></div>";
 
             var profileContainer = document.querySelector(".auth_profile_container");
             var profilePostContainer = document.querySelector(".auth_post_container");
@@ -215,7 +215,7 @@ function elcreativeAuthPost() {
                     var postData = postItem.val();
                     if (postData) {
                         document.querySelector(".item_page .elcreative_section .post_container_start .post_header_start").innerHTML = "<nav class='post_breadcrumb'>" + postData.postLabel + "</nav><h2 class='post_title'>" + postData.postTitle + "</h2><div class='post_snippet'><em>" + postData.postDescription + "</em></div>";
-                        materiaConfig.elements.postBody.innerHTML = "<div class='elcreative_alert alert_outline'><a class='elcreative_button elcreative_ripple button_small raised' type='button' aria-label='Edit Post' href='" + authUserPostPage + "?editpost=" + postItem.getKey() + "'>Edit Post</a><a href='" + authProfilePage + "' class='elcreative_button elcreative_ripple button_small raised' type='button' aria-label='Back'>Back</a></div>" + postData.postContent + "<div class='elcreative_alert alert_outline'><a class='elcreative_button elcreative_ripple button_small raised' type='button' aria-label='Edit Post' href='" + authUserPostPage + "?editpost=" + postItem.getKey() + "'>Edit Post</a><a href='" + authProfilePage + "' class='elcreative_button elcreative_ripple button_small raised' type='button' aria-label='Back'>Back</a></div>";
+                        document.querySelector(".elcreative_section .post_container_end .post_body").innerHTML = "<div class='elcreative_alert alert_outline'><a class='elcreative_button elcreative_ripple button_small raised' type='button' aria-label='Edit Post' href='" + authUserPostPage + "?editpost=" + postItem.getKey() + "'>Edit Post</a><a href='" + authProfilePage + "' class='elcreative_button elcreative_ripple button_small raised' type='button' aria-label='Back'>Back</a></div>" + postData.postContent + "<div class='elcreative_alert alert_outline'><a class='elcreative_button elcreative_ripple button_small raised' type='button' aria-label='Edit Post' href='" + authUserPostPage + "?editpost=" + postItem.getKey() + "'>Edit Post</a><a href='" + authProfilePage + "' class='elcreative_button elcreative_ripple button_small raised' type='button' aria-label='Back'>Back</a></div>";
 
                         document.querySelectorAll('pre code').forEach((el) => { hljs.highlightElement(el) });
                     } else {
@@ -229,7 +229,7 @@ function elcreativeAuthPost() {
                 userBoolean = false;
                 document.body.classList.add("auth_user_profile");
 
-                materiaConfig.elements.postBody.innerHTML = "<form id='auth_post_wrapper'><div class='elcreative_input'><input id='input_post_title' required class='input_post_title' name='postTitle' placeholder='' type='text'/><label for='input_post_title'>Post Title</label></div><div class='elcreative_input'><input id='input_post_label' required class='input_post_label' name='postLabel' placeholder='' type='text'/><label for='input_post_label'>Post Labels</label><small>Post labels separated by commas.</small></div><div class='elcreative_input'><textarea id='input_post_description' class='input_post_description' name='postDescription' placeholder='' maxlength='150'></textarea><label for='input_post_description'>Post Description</label><small>Post descriptions must not exceed 150 characters.</small></div><div class='elcreative_input'><textarea id='input_post_content' class='visibility_hidden input_post_content' name='postContent' placeholder=''></textarea></div></form>      <div class='elcreative_alert alert_outline'><button id='button_save_post' class='elcreative_button elcreative_ripple button_small raised button_save_post' type='button' aria-label='Save Post'>Save Post Changes</button><button id='button_delete_post' class='elcreative_button elcreative_ripple button_small raised button_delete_post' type='button' aria-label='Delete Post'>Delete Post</button><a href='" + authProfilePage + "' class='elcreative_button elcreative_ripple button_small raised' type='button' aria-label='Back'>Cancel</a></div>";
+                document.querySelector(".elcreative_section .post_container_end .post_body").innerHTML = "<form id='auth_post_wrapper'><div class='elcreative_input'><input id='input_post_title' required class='input_post_title' name='postTitle' placeholder='' type='text'/><label for='input_post_title'>Post Title</label></div><div class='elcreative_input'><input id='input_post_label' required class='input_post_label' name='postLabel' placeholder='' type='text'/><label for='input_post_label'>Post Labels</label><small>Post labels separated by commas.</small></div><div class='elcreative_input'><textarea id='input_post_description' class='input_post_description' name='postDescription' placeholder='' maxlength='150'></textarea><label for='input_post_description'>Post Description</label><small>Post descriptions must not exceed 150 characters.</small></div><div class='elcreative_input'><textarea id='input_post_content' class='visibility_hidden input_post_content' name='postContent' placeholder=''></textarea></div></form>      <div class='elcreative_alert alert_outline'><button id='button_save_post' class='elcreative_button elcreative_ripple button_small raised button_save_post' type='button' aria-label='Save Post'>Save Post Changes</button><button id='button_delete_post' class='elcreative_button elcreative_ripple button_small raised button_delete_post' type='button' aria-label='Delete Post'>Delete Post</button><a href='" + authProfilePage + "' class='elcreative_button elcreative_ripple button_small raised' type='button' aria-label='Back'>Cancel</a></div>";
 
                 var authPostWrapper = document.getElementById("auth_post_wrapper");
 
@@ -346,7 +346,7 @@ function elcreativeAuthPost() {
                 });
             } else {
                 document.body.classList.add("auth_user_profile");
-                materiaConfig.elements.postBody.innerHTML = "<form id='auth_post_wrapper'><div class='elcreative_input'><input id='input_post_title' required class='input_post_title' name='postTitle' placeholder='' type='text'/><label for='input_post_title'>Post Title</label></div><div class='elcreative_input'><input id='input_post_label' required class='input_post_label' name='postLabel' placeholder='' type='text'/><label for='input_post_label'>Post Labels</label><small>Post labels separated by commas.</small></div><div class='elcreative_input'><textarea id='input_post_description' class='input_post_description' name='postDescription' placeholder='' maxlength='150'></textarea><label for='input_post_description'>Post Description</label><small>Post descriptions must not exceed 150 characters.</small></div><div class='elcreative_input'><textarea id='input_post_content' class='visibility_hidden input_post_content' name='postContent' placeholder=''></textarea></div></form>      <div class='elcreative_alert alert_outline'><button id='button_save_post' class='elcreative_button elcreative_ripple button_small raised button_save_post' type='button' aria-label='Save Post'>Save Post</button><a href='" + authProfilePage + "' class='elcreative_button elcreative_ripple button_small raised' type='button' aria-label='Back'>Cancel</a></div>";
+                document.querySelector(".elcreative_section .post_container_end .post_body").innerHTML = "<form id='auth_post_wrapper'><div class='elcreative_input'><input id='input_post_title' required class='input_post_title' name='postTitle' placeholder='' type='text'/><label for='input_post_title'>Post Title</label></div><div class='elcreative_input'><input id='input_post_label' required class='input_post_label' name='postLabel' placeholder='' type='text'/><label for='input_post_label'>Post Labels</label><small>Post labels separated by commas.</small></div><div class='elcreative_input'><textarea id='input_post_description' class='input_post_description' name='postDescription' placeholder='' maxlength='150'></textarea><label for='input_post_description'>Post Description</label><small>Post descriptions must not exceed 150 characters.</small></div><div class='elcreative_input'><textarea id='input_post_content' class='visibility_hidden input_post_content' name='postContent' placeholder=''></textarea></div></form>      <div class='elcreative_alert alert_outline'><button id='button_save_post' class='elcreative_button elcreative_ripple button_small raised button_save_post' type='button' aria-label='Save Post'>Save Post</button><a href='" + authProfilePage + "' class='elcreative_button elcreative_ripple button_small raised' type='button' aria-label='Back'>Cancel</a></div>";
 
                 tinymce.init({
                     selector: "#input_post_content",
@@ -477,7 +477,7 @@ if (typeof authLoginPage !== "undefined") {
     if (location.href.indexOf(authLoginPage) !== -1) {
         functionSnackbar("Please Wait…", 6000);
         document.body.classList.add("auth_page_login");
-        materiaConfig.elements.postBody.innerHTML = "<div id='firebaseui-auth-container'></div>";
+        document.querySelector(".elcreative_section .post_container_end .post_body").innerHTML = "<div id='firebaseui-auth-container'></div>";
 
         let authScriptBundle = [
             firebaseConfig.scripts.firebaseApp,
@@ -487,7 +487,7 @@ if (typeof authLoginPage !== "undefined") {
             let elementCreateScript = document.createElement("script");
             elementCreateScript.src = url;
             elementCreateScript.async = false;
-            materiaConfig.elements.head.appendChild(elementCreateScript);
+            document.getElementsByTagName("head")[0].appendChild(elementCreateScript);
         });
 
         let elementScriptPromisess = [];
@@ -513,7 +513,7 @@ if (typeof authLoginPage !== "undefined") {
             let elementCreateScript = document.createElement("script");
             elementCreateScript.src = url;
             elementCreateScript.async = false;
-            materiaConfig.elements.head.appendChild(elementCreateScript);
+            document.getElementsByTagName("head")[0].appendChild(elementCreateScript);
         });
 
         let elementScriptPromisess = [];
@@ -541,7 +541,7 @@ if (typeof authLoginPage !== "undefined") {
             let elementCreateScript = document.createElement("script");
             elementCreateScript.src = url;
             elementCreateScript.async = false;
-            materiaConfig.elements.head.appendChild(elementCreateScript);
+            document.getElementsByTagName("head")[0].appendChild(elementCreateScript);
         });
 
         let elementScriptPromisess = [];
