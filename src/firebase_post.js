@@ -1,10 +1,6 @@
 firebase.auth().onAuthStateChanged(function (database) {
     if (database) {
-<<<<<<< Updated upstream
-        materiaConfig.elements.postBody.innerHTML = "<div class='auth_post_container'><div class='elcreative_tab'><div class='tab_button_container'></div></div></div><div id='dialog_edit_profile' class='elcreative_dialog' aria-hidden='true' role='listbox'><div class='dialog_container'><div class='dialog_header'><span></span><button class='button_close_dialog elcreative_ripple elcreative_button_icon small' type='button' aria-label='Close Dialog' data-toggle-trigger-off><svg width='24' height='24' viewBox='0 0 24 24'><path d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z'/></svg></button></div><div class='dialog_content'></div><div class='dialog_footer'></div></div></div>";
-=======
         document.querySelector(".elcreative_section .post_container_end .post_body").innerHTML = "<div class='auth_post_container'><div class='elcreative_tab'><div class='tab_button_container'></div></div></div><div id='dialog_edit_profile' class='elcreative_dialog' aria-hidden='true' role='listbox'><div class='dialog_container'><div class='dialog_header'><span></span><button class='button_close_dialog elcreative_ripple elcreative_button_icon small' type='button' aria-label='Close Dialog' data-toggle-trigger-off><svg width='24' height='24' viewBox='0 0 24 24'><path d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z'/></svg></button></div><div class='dialog_content'></div><div class='dialog_footer'></div></div></div>";
->>>>>>> Stashed changes
 
         var profilePostContainer = document.querySelector(".auth_post_container");
 
