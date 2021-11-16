@@ -3,7 +3,7 @@
     "short_name": "EL Creative Academy",
     "start_url": "https://www.elcreativeacademy.com/?m=1",
     "scope": "https://www.elcreativeacademy.com/?m=1",
-    "display": "fullscreen",
+    "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#1a73e8",
     "description": "EL Creative Academy adalah media pembelajaran yang berisi tutorial, dan referensi yang berkaitan dengan topik Teknologi dan Informasi.",
